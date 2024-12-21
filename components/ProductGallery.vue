@@ -1,10 +1,10 @@
 <template>
-  <div class="relative max-h-80">
-    <div class="max-h-80">
+  <div class="relative max-h-96">
+    <div class="max-h-96">
       <img 
         :src="currentImage" 
         :alt="'Product image ' + (currentIndex + 1)" 
-        class="w-full h-full object-cover overflow-hidden max-h-80"
+        class="w-full h-full object-cover overflow-hidden max-h-96"
       />
     </div>
     

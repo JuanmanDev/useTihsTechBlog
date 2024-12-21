@@ -12,6 +12,7 @@
       </svg>
     </a>
     <a 
+      v-if="aliexpressUrl"
       :href="aliexpressUrl" 
       target="_blank" 
       class="inline-flex items-center px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg"
