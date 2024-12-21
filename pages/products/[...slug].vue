@@ -30,8 +30,8 @@
                 </div>
 
                 <BuyButtons 
-                  :amazon-url="doc.amazonUrl" 
-                  :aliexpress-url="doc.aliexpressUrl" 
+                  :amazon-url="getAmazonUrl(doc)"
+                  :aliexpress-url="doc.aliexpressUrl2" 
                   class="mb-8"
                 />
                 
@@ -40,8 +40,8 @@
                 </div>
 
                 <BuyButtons 
-                  :amazon-url="doc.amazonUrl" 
-                  :aliexpress-url="doc.aliexpressUrl" 
+                  :amazon-url="getAmazonUrl(doc)"
+                  :aliexpress-url="doc.aliexpressUrl2"
                   class="my-8"
                 />
             </div>
@@ -82,12 +82,17 @@ definePageMeta({
 })
 
 const formatDate = (date) => {
+  return date;
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   })
 }
+
+const getAmazonUrl = (doc) => {
+  return doc.amazonUrl || `https://www.amazon.com/s?k=${doc.title.replaceAll(" ", "+")}&linkCode=ll2&tag=mobilea00cb84-20&linkId=f0f73aed1b768428de1c82b96da2de79&language=en_US&ref_=as_li_ss_tl' #Search for the product on Amazon US and put the link here`
+};
 </script>
 
 <style>

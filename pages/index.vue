@@ -21,7 +21,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-        <ContentList path="/products" v-slot="{ list }" :limit="searchQuery ? undefined : 10">
+        <ContentList path="/products" v-slot="{ list }" :limit="searchQuery ? undefined : 30">
           <div
             v-for="product in filteredProducts(list)"
             :key="product._path"
@@ -32,7 +32,7 @@
             class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105"
           >
             <NuxtLink :to="product._path">
-              <img :src="product.image" :alt="product.title" class="w-full h-64 object-cover">
+              <img :src="product.image || product.images[0]" :alt="product.title" class="w-full h-64 object-cover">
               <div class="p-6">
                 <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ product.title }}</h2>
                 <div class="flex items-center mb-2">
@@ -50,12 +50,12 @@
                     <span class="text-2xl font-bold text-green-600">${{ product.price }}</span>
                   </div>
                   <div class="space-x-2">
-                    <a :href="product.amazonUrl" target="_blank" class="inline-flex items-center px-3 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transform hover:scale-105 active:scale-95 transition">
+                    <a @click.stop :href="getAmazonUrl(product)" target="_blank" class="inline-flex items-center px-3 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500 transform hover:scale-105 active:scale-95 transition">
                       Amazon
                     </a>
-                    <a :href="product.aliexpressUrl" target="_blank" class="inline-flex items-center px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transform hover:scale-105 active:scale-95 transition">
+                    <!-- <a :href="product.aliexpressUrl" target="_blank" class="inline-flex items-center px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transform hover:scale-105 active:scale-95 transition">
                       AliExpress
-                    </a>
+                    </a> -->
                   </div>
                 </div>
               </div>
@@ -83,4 +83,9 @@ const filteredProducts = (list) => {
     product.description.toLowerCase().includes(query)
   )
 }
+
+
+const getAmazonUrl = (doc) => {
+  return `https://www.amazon.com/s?k=${doc.title.replaceAll(" ", "+")}&linkCode=ll2&tag=mobilea00cb84-20&linkId=f0f73aed1b768428de1c82b96da2de79&language=en_US&ref_=as_li_ss_tl' #Search for the product on Amazon US and put the link here`
+};
 </script>
